@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-deep: #070D19;
+    --color-bg-base: #0B1528;
+    --color-bg-card: #112240;
+    --color-gold-accent: #C89D42;
+    --color-text-primary: #F8FAFC;
+    --color-text-secondary: #94A3B8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    overflow-x: clip;
+    @apply bg-navy-950 text-slate-100 font-sans antialiased selection:bg-gold-500 selection:text-navy-950;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-feature-settings: "lnum" 1;
+  }
+
+  /* Accessible focus indicators for keyboard navigation */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-navy-950;
+  }
+
+  button, input, select, textarea {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Custom Refined Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070D19;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C325B;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C89D42;
+}
+
+/* Luxury visual accents */
+.gold-glow {
+  box-shadow: 0 0 25px -5px rgba(200, 157, 66, 0.25);
+}
+
+.gold-glow-subtle {
+  box-shadow: 0 4px 20px -2px rgba(200, 157, 66, 0.12);
+}
+
+.gold-gradient-text {
+  @apply bg-gradient-to-r from-gold-200 via-gold-400 to-gold-300 bg-clip-text text-transparent;
+}
+
+.luxury-card {
+  @apply bg-navy-900/80 border border-slate-800/80 rounded-2xl transition-all duration-300 hover:border-gold-500/40;
+}
+
+.luxury-card-hover {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold-500/5;
+}
+
+/* --- Scroll-animation utilities (framer-motion companions) --- */
+
+/* Trusted-by infinite marquee */
+@keyframes edm-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.edm-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: edm-marquee 42s linear infinite;
+}
+.edm-marquee:hover .edm-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .edm-marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+}
+
+.edm-tape-ticks {
+  background-image: repeating-linear-gradient(to right, transparent 0, transparent 23px, rgba(200,157,66,0.55) 23px, rgba(200,157,66,0.55) 24px);
+}
+
+/* Gold stitch / dash line that draws itself */
+@keyframes edm-stitch-dash {
+  to { stroke-dashoffset: 0; }
+}
+.edm-stitch-line {
+  stroke-dasharray: 6 8;
+}
+
+/* Subtle shimmer sweep for gold gradient text */
+@keyframes edm-gold-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.edm-gold-shimmer {
+  background-size: 200% auto;
+  animation: edm-gold-shimmer 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .edm-gold-shimmer { animation: none; }
+}
+
+/* --- V2 strong-motion utilities --- */
+
+/* Oversized outlined backdrop word (SectionBackdrop) */
+.edm-outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(200, 157, 66, 0.13);
+}
+
+/* Real measuring-tape ticks for the V2 tape progress bar:
+   small ticks every 12px, tall ticks every 60px, hanging from the top */
+.edm-tape-ticks-v2 {
+  background-image:
+    repeating-linear-gradient(to right, rgba(7, 13, 25, 0.55) 0, rgba(7, 13, 25, 0.55) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(to right, rgba(7, 13, 25, 0.8) 0, rgba(7, 13, 25, 0.8) 2px, transparent 2px, transparent 60px);
+  background-size: 100% 7px, 100% 13px;
+  background-position: top left, top left;
+  background-repeat: repeat-x;
+}
+
+/* Dashed gold thread for the floating side stitch rail */
+.edm-stitch-rail {
+  background-image: repeating-linear-gradient(to bottom, rgba(200, 157, 66, 0.55) 0, rgba(200, 157, 66, 0.55) 7px, transparent 7px, transparent 14px);
+  background-size: 2px 100%;
+  background-position: center;
+  background-repeat: repeat-y;
+}
